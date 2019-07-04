@@ -1,5 +1,12 @@
 import java.util.EmptyStackException;
 
+/*
+ * I designed this custom stack structure while watching
+ * coursera.org algorithms part I course
+ *
+ * I implemented all that was in the video and additionally implemented size() function
+ */
+
 class CustomStack<T>
 {
     // First element in a stack, it is null by default
