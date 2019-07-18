@@ -1,3 +1,3 @@
-# Coding-Tasks
+# Different programming problems
 
-Java tasks I solve on [codingbat](http://codingbat.com)
+here you can see some problems I solved on codewars, hackerrank, codingbat

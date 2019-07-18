@@ -1,22 +1,42 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.EmptyStackException;
+import java.util.Iterator;
 
-/*
- * I designed this custom stack structure while watching
- * coursera.org algorithms part I course
- *
- * I implemented all that was in the video and additionally implemented size() function
- */
-
-class CustomStack<T>
+public class CustomStack<Item> implements Iterable<Item>
 {
-    // First element in a stack, it is null by default
     private Node first = null;
 
-    // a local class
-    public class Node
+    class Node
     {
-        T object;
+        Item item;
         Node next;
+    }
+
+    @NotNull
+    @Override
+    public Iterator<Item> iterator()
+    {
+        return new Iterator<Item>()
+        {
+            Node current = first;
+
+            @Override
+            public boolean hasNext()
+            {
+                return current != null;
+            }
+
+            @Override
+            public Item next()
+            {
+                Item item = current.item;
+
+                current = current.next;
+
+                return item;
+            }
+        };
     }
 
     public boolean isEmpty()
@@ -24,33 +44,21 @@ class CustomStack<T>
         return first == null;
     }
 
-    public T clear()
-    {
-        T item = first.object;
-
-        first = null;
-
-        return item;
-    }
-
-    public T push(T object)
+    public void push(Item item)
     {
         Node oldFirst = first;
 
         first = new Node();
-
         first.next = oldFirst;
-        first.object = object;
-
-        return object;
+        first.item = item;
     }
 
-    public T pop()
+    public Item pop()
     {
         if (isEmpty())
             throw new EmptyStackException();
-
-        T item = first.object;
+        
+        Item item = first.item;
 
         first = first.next;
 
@@ -59,13 +67,13 @@ class CustomStack<T>
 
     public int size()
     {
-        if (first == null) return 0;
+        if (isEmpty())
+            return 0;
 
         int size = 1;
 
         Node element = first;
 
-        // while last element is not reached
         while (element.next != null)
         {
             size++;
